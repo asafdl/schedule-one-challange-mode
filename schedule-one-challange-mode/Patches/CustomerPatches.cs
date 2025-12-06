@@ -19,13 +19,13 @@ namespace challange_mode.Patches
         public const float DRUG_AFFINITY_MAX_IMPACT = 0.3f;
         
         public const float EFFECT_MATCH_NONE = -0.35f;
-        public const float EFFECT_MATCH_ONE = -0.15f;
-        public const float EFFECT_MATCH_TWO = 0.05f;
+        public const float EFFECT_MATCH_ONE = 0.0f;
+        public const float EFFECT_MATCH_TWO = 0.15f;
         public const float EFFECT_MATCH_THREE = 0.25f;
         
-        public const float ENJOYMENT_CRITICAL_LOW = 0.3f;
-        public const float ENJOYMENT_LOW = 0.5f;
-        public const float ENJOYMENT_MEDIUM = 0.7f;
+        public const float ENJOYMENT_CRITICAL_LOW = 0.25f;
+        public const float ENJOYMENT_LOW = 0.45f;
+        public const float ENJOYMENT_MEDIUM = 0.65f;
         
         public const float MULTIPLIER_CRITICAL_LOW = 0.1f;
         public const float MULTIPLIER_LOW = 0.3f;

@@ -88,31 +88,30 @@ Customer handover screens now show their drug type preferences:
 
 **Build the mod:**
 ```bash
-cd schedule-one-challange-mode
-dotnet build -c MONO
+./build.sh
 ```
 
-**Output location:**
-```
-bin/MONO/netstandard2.1/challange_mode.dll
+**Run tests and simulations:**
+```bash
+./test.sh
 ```
 
-The build script automatically:
-- Compiles the mod
-- Copies the DLL to your game's `Mods` folder (if build succeeds)
+The tests will show difficulty impact for various scenarios.
 
 #### Development Workflow
 
-**Clean build:**
+**Quick development build:**
 ```bash
-dotnet clean
+cd schedule-one-challange-mode
 dotnet build -c MONO
 ```
+This will auto-launch the game for testing.
 
-**Quick rebuild:**
+**Production build:**
 ```bash
-dotnet build -c MONO --no-restore
+./build.sh
 ```
+This builds without launching the game and copies to `dist/`.
 
 ### Verify Installation
 
