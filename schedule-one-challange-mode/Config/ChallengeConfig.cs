@@ -22,22 +22,19 @@ namespace challange_mode
         public const float COUNTEROFFER_MIN_ENJOYMENT = 0.4f;
         public const float COUNTEROFFER_MEDIOCRE_THRESHOLD = 0.6f;
         public const float COUNTEROFFER_MAX_REJECT_CHANCE = 0.5f;
-    }
 
-    public static class CustomerBehaviorHelpers
-    {
         public static float GetSuccessMultiplier(float enjoyment)
         {
-            if (enjoyment < ChallengeConfig.ENJOYMENT_CRITICAL_LOW)
-                return ChallengeConfig.MULTIPLIER_CRITICAL_LOW;
+            if (enjoyment < ENJOYMENT_CRITICAL_LOW)
+                return MULTIPLIER_CRITICAL_LOW;
             
-            if (enjoyment < ChallengeConfig.ENJOYMENT_LOW)
-                return ChallengeConfig.MULTIPLIER_LOW;
+            if (enjoyment < ENJOYMENT_LOW)
+                return MULTIPLIER_LOW;
             
-            if (enjoyment < ChallengeConfig.ENJOYMENT_MEDIUM)
-                return ChallengeConfig.MULTIPLIER_MEDIUM;
+            if (enjoyment < ENJOYMENT_MEDIUM)
+                return MULTIPLIER_MEDIUM;
             
-            return ChallengeConfig.MULTIPLIER_HIGH;
+            return MULTIPLIER_HIGH;
         }
     }
 }

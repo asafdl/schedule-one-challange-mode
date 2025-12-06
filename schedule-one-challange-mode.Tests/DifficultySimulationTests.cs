@@ -67,7 +67,7 @@ public class DifficultySimulationTests
         float finalEnjoyment = baseEnjoyment + drugBonus + effectBonus;
         finalEnjoyment = Math.Clamp(finalEnjoyment, 0f, 1f);
 
-        float successMultiplier = CustomerBehaviorHelpers.GetSuccessMultiplier(finalEnjoyment);
+            float successMultiplier = ChallengeConfig.GetSuccessMultiplier(finalEnjoyment);
         
         float vanillaSuccess = 0.70f;
         float modifiedSuccess = vanillaSuccess * successMultiplier;

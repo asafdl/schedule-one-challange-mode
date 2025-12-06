@@ -156,7 +156,7 @@ namespace challange_mode.Patches
                 return;
 
             float avgEnjoyment = CustomerBehaviorHelpers.CalculateAverageEnjoyment(__instance, items);
-            float multiplier = CustomerBehaviorHelpers.GetSuccessMultiplier(avgEnjoyment);
+            float multiplier = ChallengeConfig.GetSuccessMultiplier(avgEnjoyment);
 
             __result *= multiplier;
         }
