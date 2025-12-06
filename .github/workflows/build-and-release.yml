@@ -1,0 +1,78 @@
+name: Build and Release
+
+on:
+  push:
+    branches:
+      - master
+    paths-ignore:
+      - '**.md'
+      - '.gitignore'
+
+jobs:
+  build:
+    runs-on: windows-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: '8.0.x'
+        
+    - name: Restore dependencies
+      run: dotnet restore schedule-one-challange-mode/schedule-one-challange-mode.csproj
+      
+    - name: Build MONO
+      run: dotnet build schedule-one-challange-mode/schedule-one-challange-mode.csproj -c MONO --no-restore
+      
+    - name: Upload build artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: challange_mode-dll
+        path: schedule-one-challange-mode/bin/MONO/netstandard2.1/challange_mode.dll
+        
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/master'
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+    - name: Download artifact
+      uses: actions/download-artifact@v4
+      with:
+        name: challange_mode-dll
+        path: ./release
+        
+    - name: Get commit info
+      id: commit_info
+      run: |
+        echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+        echo "date=$(date +'%Y%m%d-%H%M')" >> $GITHUB_OUTPUT
+        
+    - name: Create Release
+      uses: softprops/action-gh-release@v1
+      with:
+        tag_name: build-${{ steps.commit_info.outputs.date }}-${{ steps.commit_info.outputs.sha_short }}
+        name: Build ${{ steps.commit_info.outputs.date }}
+        body: |
+          Automated build from commit ${{ github.sha }}
+          
+          ## Changes
+          ${{ github.event.head_commit.message }}
+          
+          ## Installation
+          1. Download `challange_mode.dll`
+          2. Place in `Schedule I/Mods/` folder
+          3. Launch the game
+        files: |
+          ./release/challange_mode.dll
+        draft: false
+        prerelease: false
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+

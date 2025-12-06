@@ -11,7 +11,7 @@ namespace challange_mode
     {
         public override void OnInitializeMelon()
         {
-            LoggerInstance.Msg("Challenge Mode initialized - success rates reduced by 70%");
+            LoggerInstance.Msg("Challenge Mode initialized");
             
             // Apply Harmony patches
             var harmony = new HarmonyLib.Harmony("challange_mode");
