@@ -40,16 +40,11 @@ namespace challange_mode.Patches
             // Appeal = enjoyment + price_factor, can range from -1 to 2+
             bool foundGoodProduct = __result != null && appeal >= ChallengeConfig.MIN_APPEAL_FOR_SUCCESS;
 
-            if (foundGoodProduct)
-            {
-                ProductRequestTracker.ResetFailureCount(__instance.NPC.ID);
-            }
-            else 
+            if (!foundGoodProduct)
             {
                 ProductRequestTracker.RecordFailedRequest(__instance);
-                int failureCount = ProductRequestTracker.GetFailureCount(__instance.NPC.ID);
                 string reason = __result == null ? "no products available" : $"low appeal ({appeal:F3})";
-                MelonLogger.Msg($"[ProductRequest] {__instance.NPC.fullName} FAILED: {reason}, failures: {failureCount}");
+                MelonLogger.Msg($"[ProductRequest] {__instance.NPC.fullName} FAILED: {reason}");
             }
         }
     }

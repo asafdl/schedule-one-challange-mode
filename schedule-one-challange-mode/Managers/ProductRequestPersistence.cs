@@ -16,8 +16,7 @@ namespace challange_mode.Managers
         public class CustomerTrackingEntry
         {
             public string customerId;
-            public string lastMessageTime; // ISO 8601 format
-            public int failedRequestCount;
+            public string lastMessageTime;
         }
 
         public List<CustomerTrackingEntry> trackingData = new List<CustomerTrackingEntry>();
@@ -47,16 +46,12 @@ namespace challange_mode.Managers
         /// <summary>
         /// Save tracking data to disk
         /// </summary>
-        public static void SaveData(Dictionary<string, DateTime> lastMessageTimes, 
-                                    Dictionary<string, int> failedRequestCounts)
+        public static void SaveData(Dictionary<string, DateTime> lastMessageTimes)
         {
             try
             {
                 var saveData = new ProductRequestSaveData();
-
-                // Combine data from both dictionaries
                 var allCustomerIds = new HashSet<string>(lastMessageTimes.Keys);
-                allCustomerIds.UnionWith(failedRequestCounts.Keys);
 
                 foreach (var customerId in allCustomerIds)
                 {
@@ -66,9 +61,6 @@ namespace challange_mode.Managers
                         lastMessageTime = lastMessageTimes.ContainsKey(customerId) 
                             ? lastMessageTimes[customerId].ToString("O") 
                             : string.Empty,
-                        failedRequestCount = failedRequestCounts.ContainsKey(customerId) 
-                            ? failedRequestCounts[customerId] 
-                            : 0
                     };
 
                     saveData.trackingData.Add(entry);
@@ -89,11 +81,9 @@ namespace challange_mode.Managers
         /// <summary>
         /// Load tracking data from disk
         /// </summary>
-        public static void LoadData(out Dictionary<string, DateTime> lastMessageTimes,
-                                    out Dictionary<string, int> failedRequestCounts)
+        public static void LoadData(out Dictionary<string, DateTime> lastMessageTimes)
         {
             lastMessageTimes = new Dictionary<string, DateTime>();
-            failedRequestCounts = new Dictionary<string, int>();
 
             try
             {
@@ -116,19 +106,12 @@ namespace challange_mode.Managers
 
                 foreach (var entry in saveData.trackingData)
                 {
-                    // Parse last message time
                     if (!string.IsNullOrEmpty(entry.lastMessageTime))
                     {
                         if (DateTime.TryParse(entry.lastMessageTime, out DateTime parsedTime))
                         {
                             lastMessageTimes[entry.customerId] = parsedTime;
                         }
-                    }
-
-                    // Load failed request count
-                    if (entry.failedRequestCount > 0)
-                    {
-                        failedRequestCounts[entry.customerId] = entry.failedRequestCount;
                     }
                 }
 
