@@ -6,9 +6,6 @@ using UnityEngine;
 
 namespace challange_mode.Managers
 {
-    /// <summary>
-    /// Handles persistence of product request tracking data
-    /// </summary>
     [Serializable]
     public class ProductRequestSaveData
     {
@@ -26,15 +23,10 @@ namespace challange_mode.Managers
     {
         private const string SAVE_FILE_NAME = "product_request_tracking.json";
         
-        /// <summary>
-        /// Get the full path to the save file
-        /// </summary>
         private static string GetSaveFilePath()
         {
-            // Save to game's persistent data path
             string directory = Path.Combine(Application.persistentDataPath, "ChallengeMod");
             
-            // Ensure directory exists
             if (!Directory.Exists(directory))
             {
                 Directory.CreateDirectory(directory);
@@ -43,9 +35,6 @@ namespace challange_mode.Managers
             return Path.Combine(directory, SAVE_FILE_NAME);
         }
 
-        /// <summary>
-        /// Save tracking data to disk
-        /// </summary>
         public static void SaveData(Dictionary<string, DateTime> lastMessageTimes)
         {
             try
@@ -78,9 +67,6 @@ namespace challange_mode.Managers
             }
         }
 
-        /// <summary>
-        /// Load tracking data from disk
-        /// </summary>
         public static void LoadData(out Dictionary<string, DateTime> lastMessageTimes)
         {
             lastMessageTimes = new Dictionary<string, DateTime>();
@@ -123,9 +109,6 @@ namespace challange_mode.Managers
             }
         }
 
-        /// <summary>
-        /// Delete the save file (for testing/cleanup)
-        /// </summary>
         public static void ClearSaveData()
         {
             try

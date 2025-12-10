@@ -87,7 +87,6 @@ namespace challange_mode.Managers
                 var message = new Message(messageText, Message.ESenderType.Other, _endOfGroup: true);
                 conversation.SendMessage(message, notify: true, network: true);
 
-                MelonLogger.Msg($"[ProductRequestTracker] Successfully sent message to {customer.NPC.fullName}: \"{messageText}\"");
             }
             catch (Exception ex)
             {

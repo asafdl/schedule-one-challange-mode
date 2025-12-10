@@ -15,9 +15,6 @@ namespace challange_mode.Patches
 {
     public static class CustomerBehaviorHelpers
     {
-        /// <summary>
-        /// Calculates drug type affinity bonus based on customer preferences
-        /// </summary>
         public static float CalculateDrugAffinityBonus(CustomerData customerData, EDrugType drugType)
         {
             if (customerData?.DefaultAffinityData?.ProductAffinities == null)
@@ -27,10 +24,6 @@ namespace challange_mode.Patches
             return affinity * ChallengeConfig.DRUG_AFFINITY_MAX_IMPACT;
         }
 
-        /// <summary>
-        /// Calculates effect matching bonus based on preferred effects.
-        /// Uses discrete difficulty tiers based on exact match count.
-        /// </summary>
         public static float CalculateEffectMatchBonus(CustomerData customerData, ProductDefinition product)
         {
             if (customerData?.PreferredProperties == null || 
@@ -52,9 +45,6 @@ namespace challange_mode.Patches
             };
         }
 
-        /// <summary>
-        /// Calculates average enjoyment across multiple product items
-        /// </summary>
         public static float CalculateAverageEnjoyment(Customer customer, List<ItemInstance> items)
         {
             if (items == null || items.Count == 0)
@@ -79,24 +69,8 @@ namespace challange_mode.Patches
 
             return productCount > 0 ? totalEnjoyment / productCount : 0f;
         }
-
-
-        /// <summary>
-        /// Calculates average order spend for a customer
-        /// </summary>
-        public static float GetAverageOrderSpend(Customer customer)
-        {
-            float normalizedRelation = customer.NPC.RelationData.RelationDelta / 5f;
-            float adjustedWeeklySpend = customer.CustomerData.GetAdjustedWeeklySpend(normalizedRelation);
-            var orderDays = customer.CustomerData.GetOrderDays(customer.CurrentAddiction, normalizedRelation);
-            
-            return adjustedWeeklySpend / orderDays.Count;
-        }
     }
 
-    /// <summary>
-    /// Modifies product enjoyment calculation to emphasize drug type and effect preferences
-    /// </summary>
     [HarmonyPatch(typeof(Customer), nameof(Customer.GetProductEnjoyment))]
     public class GetProductEnjoyment_Patch
     {
@@ -114,16 +88,12 @@ namespace challange_mode.Patches
             __result += drugTypeBonus + effectBonus;
             __result = Mathf.Clamp01(__result);
 
-            MelonLogger.Msg($"[Enjoyment] {__instance.NPC.fullName} → {product.Name} ({quality}): " +
-                           $"Base={originalResult:F3}, Drug={drugTypeBonus:+0.000;-0.000;+0.000}, " +
-                           $"Effects={effectBonus:+0.000;-0.000;+0.000}, Final={__result:F3}");
+            // MelonLogger.Msg($"[Enjoyment] {__instance.NPC.fullName} → {product.Name} ({quality}): " +
+            //                $"Base={originalResult:F3}, Drug={drugTypeBonus:+0.000;-0.000;+0.000}, " +
+            //                $"Effects={effectBonus:+0.000;-0.000;+0.000}, Final={__result:F3}");
         }
     }
 
-    /// <summary>
-    /// Applies harsh penalties to success chance based on product enjoyment
-    /// Also scales difficulty by customer quality standards (early game more forgiving)
-    /// </summary>
     [HarmonyPatch(typeof(Customer), nameof(Customer.GetOfferSuccessChance))]
     public class GetOfferSuccessChance_Patch
     {
@@ -141,9 +111,6 @@ namespace challange_mode.Patches
         }
     }
 
-    /// <summary>
-    /// Prevents customers from requesting products they don't love
-    /// </summary>
     [HarmonyPatch(typeof(Customer), "GetWeightedRandomProduct")]
     public class GetWeightedRandomProduct_Patch
     {
@@ -158,9 +125,6 @@ namespace challange_mode.Patches
         }
     }
 
-    /// <summary>
-    /// Applies stricter requirements for counter-offer acceptance
-    /// </summary>
     [HarmonyPatch(typeof(Customer), "EvaluateCounteroffer")]
     public class EvaluateCounteroffer_Patch
     {
@@ -170,12 +134,7 @@ namespace challange_mode.Patches
             if (!__result)
                 return;
 
-            float avgOrderSpend = CustomerBehaviorHelpers.GetAverageOrderSpend(__instance);
-            if (price >= avgOrderSpend * ChallengeConfig.COUNTEROFFER_PRICE_LIMIT_MULTIPLIER)
-            {
-                __result = false;
-                return;
-            }
+            MelonLogger.Msg($"[Counteroffer] {__instance.NPC.fullName}: {product.Name} x{quantity} @ ${price:F0}");
 
             float enjoyment = __instance.GetProductEnjoyment(
                 product, 
@@ -183,6 +142,7 @@ namespace challange_mode.Patches
 
             if (enjoyment < ChallengeConfig.COUNTEROFFER_MIN_ENJOYMENT)
             {
+                MelonLogger.Msg($"[Counteroffer] REJECTED - Enjoyment too low ({enjoyment:F3} < {ChallengeConfig.COUNTEROFFER_MIN_ENJOYMENT:F3})");
                 __result = false;
                 return;
             }
@@ -197,8 +157,22 @@ namespace challange_mode.Patches
                     0f, 
                     enjoymentAboveMin / enjoymentRange);
 
-                if (UnityEngine.Random.value < rejectChance)
+                float roll = UnityEngine.Random.value;
+                MelonLogger.Msg($"[Counteroffer] Mediocre enjoyment ({enjoyment:F3}) - reject chance: {rejectChance:F2} ({(rejectChance*100):F0}%), roll: {roll:F3}");
+
+                if (roll < rejectChance)
+                {
+                    MelonLogger.Msg($"[Counteroffer] REJECTED - Failed probability check");
                     __result = false;
+                }
+                else
+                {
+                    MelonLogger.Msg($"[Counteroffer] ACCEPTED - Passed probability check");
+                }
+            }
+            else
+            {
+                MelonLogger.Msg($"[Counteroffer] ACCEPTED - Good enjoyment ({enjoyment:F3})");
             }
         }
     }
