@@ -22,6 +22,6 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ steps.version.outputs.tag }}
-          files: dist/challange_mode.dll
+          files: dist/challenge_mode.dll
           generate_release_notes: true
 

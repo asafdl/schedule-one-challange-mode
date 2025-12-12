@@ -1,10 +1,10 @@
 ﻿using MelonLoader;
-using challange_mode.Managers;
+using challenge_mode.Managers;
 
-[assembly: MelonInfo(typeof(challange_mode.Core), "Challenge Mode", "1.0.0", "Dixie", null)]
+[assembly: MelonInfo(typeof(challenge_mode.Core), "Challenge Mode", "1.0.0", "Dixie", null)]
 [assembly: MelonGame("TVGS", "Schedule I")]
 
-namespace challange_mode
+namespace challenge_mode
 {
     public class Core : MelonMod
     {

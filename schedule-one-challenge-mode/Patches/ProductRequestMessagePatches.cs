@@ -1,6 +1,6 @@
 using HarmonyLib;
 using System.Collections.Generic;
-using challange_mode.Managers;
+using challenge_mode.Managers;
 using UnityEngine;
 using MelonLoader;
 
@@ -11,7 +11,7 @@ using ScheduleOne.ItemFramework;
 using ScheduleOne.UI.Handover;
 #endif
 
-namespace challange_mode.Patches
+namespace challenge_mode.Patches
 {
 
     [HarmonyPatch(typeof(Customer), "GetWeightedRandomProduct")]

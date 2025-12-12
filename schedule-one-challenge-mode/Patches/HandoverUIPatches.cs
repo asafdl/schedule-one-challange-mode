@@ -9,7 +9,7 @@ using ScheduleOne.Economy;
 using ScheduleOne.Product;
 #endif
 
-namespace challange_mode.Patches
+namespace challenge_mode.Patches
 {
 
     public static class AffinityDisplayConfig

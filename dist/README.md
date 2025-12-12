@@ -8,7 +8,7 @@
 3. The script will build and copy the DLL to `dist/`
 4. Commit and push:
    ```bash
-   git add dist/challange_mode.dll
+   git add dist/challenge_mode.dll
    git commit -m "Release: version description"
    git push origin master
    ```

@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
-    <RootNamespace>challange_mode.Tests</RootNamespace>
+    <RootNamespace>challenge_mode.Tests</RootNamespace>
     <IsPackable>false</IsPackable>
   </PropertyGroup>
 
@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Include="..\schedule-one-challange-mode\Config\ChallengeConfig.cs" Link="Shared\ChallengeConfig.cs" />
+    <Compile Include="..\schedule-one-challenge-mode\Config\ChallengeConfig.cs" Link="Shared\ChallengeConfig.cs" />
   </ItemGroup>
 
 </Project>

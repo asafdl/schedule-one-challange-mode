@@ -1,8 +1,8 @@
 using Xunit;
 using Xunit.Abstractions;
-using challange_mode;
+using challenge_mode;
 
-namespace challange_mode.Tests;
+namespace challenge_mode.Tests;
 
 /// <summary>
 /// Tests to ensure difficulty configuration is balanced

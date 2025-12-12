@@ -1,4 +1,4 @@
-namespace challange_mode
+namespace challenge_mode
 {
     public static class ChallengeConfig
     {

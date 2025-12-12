@@ -1,9 +1,9 @@
 using System;
 using Xunit;
 using Xunit.Abstractions;
-using challange_mode;
+using challenge_mode;
 
-namespace challange_mode.Tests;
+namespace challenge_mode.Tests;
 
 /// <summary>
 /// Simulates customer deal scenarios to visualize difficulty impact

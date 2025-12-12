@@ -1,11 +1,11 @@
 using HarmonyLib;
-using challange_mode.Managers;
+using challenge_mode.Managers;
 
 #if MONO
 using ScheduleOne.Persistence;
 #endif
 
-namespace challange_mode.Patches
+namespace challenge_mode.Patches
 {
     /// <summary>
     /// Hook into game save to persist our tracking data

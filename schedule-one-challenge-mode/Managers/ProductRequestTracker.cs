@@ -14,7 +14,7 @@ using ScheduleOne.Effects;
 using ScheduleOne.DevUtilities;
 #endif
 
-namespace challange_mode.Managers
+namespace challenge_mode.Managers
 {
     /// <summary>
     /// Tracks failed product requests per customer and manages messaging cooldowns

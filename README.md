@@ -48,13 +48,13 @@ Customer handover screens now show their drug type preferences:
 
 ### Option 1: Install Pre-built
 
-1. Download the latest `challange_mode.dll` from the [`dist/`](https://github.com/asafdl/schedule-one-challange-mode/tree/master/dist) folder
+1. Download the latest `challenge_mode.dll` from the [`dist/`](https://github.com/asafdl/schedule-one-challenge-mode/tree/master/dist) folder
 2. Navigate to your Schedule I installation directory
 3. Place the DLL in the `Mods` folder:
    ```
    Schedule I/
    └── Mods/
-       └── challange_mode.dll
+       └── challenge_mode.dll
    ```
 4. Launch the game - MelonLoader will automatically load the mod
 
@@ -63,13 +63,13 @@ Customer handover screens now show their drug type preferences:
 #### Initial Setup
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/asafdl/schedule-one-challange-mode.git
-   cd schedule-one-challange-mode
+   git clone https://github.com/asafdl/schedule-one-challenge-mode.git
+   cd schedule-one-challenge-mode
    ```
 
 2. **Configure game path**
    
-   Open `schedule-one-challange-mode/schedule-one-challange-mode.csproj` and update the game directory path:
+   Open `schedule-one-challenge-mode/schedule-one-challenge-mode.csproj` and update the game directory path:
    ```xml
    <PropertyGroup Condition="'$(Configuration)' == 'MONO'">
        <S1Dir>E:\SteamLibrary\steamapps\common\Schedule I</S1Dir>
@@ -102,7 +102,7 @@ The tests will show difficulty impact for various scenarios.
 
 **Quick development build:**
 ```bash
-cd schedule-one-challange-mode
+cd schedule-one-challenge-mode
 dotnet build -c MONO
 ```
 This will auto-launch the game for testing.
@@ -142,7 +142,7 @@ After modifying, rebuild the mod with `dotnet build -c MONO`.
 
 ### Game Path
 
-If your Schedule I installation is in a non-standard location, update the path in `schedule-one-challange-mode.csproj`:
+If your Schedule I installation is in a non-standard location, update the path in `schedule-one-challenge-mode.csproj`:
 
 ```xml
 <S1Dir>YOUR_PATH_HERE\Schedule I</S1Dir>
@@ -206,7 +206,7 @@ Make customer affinities and preferences change over time to prevent the game fr
 3. The script will build and copy the DLL to `dist/`
 4. Commit and push:
    ```bash
-   git add dist/challange_mode.dll
+   git add dist/challenge_mode.dll
    git commit -m "Release: version description"
    git push origin master
    ```
@@ -219,7 +219,7 @@ We welcome contributions! Here's how you can help:
 
 ### Reporting Issues
 
-Found a bug or have a suggestion? [Open an issue](https://github.com/asafdl/schedule-one-challange-mode/issues) with:
+Found a bug or have a suggestion? [Open an issue](https://github.com/asafdl/schedule-one-challenge-mode/issues) with:
 - Clear description of the problem
 - Steps to reproduce
 - Expected vs actual behavior
@@ -242,38 +242,6 @@ Found a bug or have a suggestion? [Open an issue](https://github.com/asafdl/sche
 5. **Submit PR**
    - Describe what your changes do
    - Reference any related issues
-
-### Code Style Guidelines
-
-- Use descriptive variable names
-- Add XML documentation comments (`///`) for public methods
-- Group related constants in config classes
-- Follow existing patterns for consistency
-- Keep methods focused and single-purpose
-
-### Development Tips
-
-**Hot reload during development:**
-```bash
-# Terminal 1: Watch for file changes
-dotnet watch build -c MONO
-
-# Terminal 2: Restart game to test changes
-```
-
-**Debug logging:**
-```csharp
-MelonLogger.Msg("Your debug message");
-MelonLogger.Warning("Warning message");
-MelonLogger.Error("Error message");
-```
-
-**Testing checklist:**
-- [ ] Direct sales (handover) work correctly
-- [ ] Message-based contracts generate properly
-- [ ] Counter-offers evaluate correctly
-- [ ] UI displays affinity information
-- [ ] No console errors on game start
 
 ## License
 

@@ -2,7 +2,7 @@
 	<PropertyGroup>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>disable</Nullable>
-		<RootNamespace>challange_mode</RootNamespace>
+		<RootNamespace>challenge_mode</RootNamespace>
 		<LangVersion>default</LangVersion>
 		<IsPackable>false</IsPackable>
 		<AssemblyVersion>1.0.0.0</AssemblyVersion>
@@ -15,12 +15,12 @@
 
 	<PropertyGroup Condition="'$(Configuration)' == 'MONO'">
 		<TargetFramework>netstandard2.1</TargetFramework>
-		<AssemblyName>challange_mode</AssemblyName>
+		<AssemblyName>challenge_mode</AssemblyName>
 	</PropertyGroup>
 
 	<PropertyGroup Condition="'$(Configuration)' == 'IL2CPP'">
 		<TargetFramework>net6.0</TargetFramework>
-		<AssemblyName>challange_mode_IL2CPP</AssemblyName>
+		<AssemblyName>challenge_mode_IL2CPP</AssemblyName>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)' == 'MONO'">
 		<S1Dir>E:\SteamLibrary\steamapps\common\Schedule I</S1Dir>

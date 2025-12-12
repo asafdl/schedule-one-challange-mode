@@ -2,7 +2,7 @@ using HarmonyLib;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using challange_mode;
+using challenge_mode;
 using MelonLoader;
 
 #if MONO
@@ -11,7 +11,7 @@ using ScheduleOne.ItemFramework;
 using ScheduleOne.Product;
 #endif
 
-namespace challange_mode.Patches
+namespace challenge_mode.Patches
 {
     public static class CustomerBehaviorHelpers
     {

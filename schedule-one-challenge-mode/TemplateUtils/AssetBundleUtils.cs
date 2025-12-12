@@ -1,7 +1,7 @@
 ﻿using MelonLoader;
 using UnityEngine;
 
-namespace challange_mode.TemplateUtils
+namespace challenge_mode.TemplateUtils
 {
     public static class AssetBundleUtils
     {
